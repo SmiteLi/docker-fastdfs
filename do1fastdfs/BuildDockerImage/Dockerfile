@@ -9,6 +9,8 @@ ENV FASTDFS_DATA /data/fastdfs
 RUN yum -y update \
     && yum -y install git gcc gcc-c++ make automake autoconf libtool pcre pcre-devel zlib zlib-devel openssl openssl-devel wget
 
+ADD * ${SRC_HOME}/
+
 #下载fastdfs.libfastcommon.nginx插件源码
 RUN mkdir -p ${SRC_HOME} ${FASTDFS_DATA} && cd ${SRC_HOME} \
     && git clone https://github.com/happyfish100/libfastcommon.git --depth 1 \
@@ -36,8 +38,7 @@ RUN cd ${SRC_HOME}/fastdfs/ \
     && mkdir -p ${FASTDFS_DATA}/tracker ${FASTDFS_DATA}/storage
 
 # 获取nginx源码
-RUN cd ${SRC_HOME} \
-    && cd nginx-1.16.1/ \
+RUN cd ${SRC_HOME} && tar -xf nginx-1.16.1.tar.gz && cd nginx-1.16.1/ \
     && ./configure --add-module=${SRC_HOME}/fastdfs-nginx-module/src/ --with-http_ssl_module --with-pcre --with-stream --with-stream_ssl_module --with-http_ssl_module --with-http_v2_module --with-threads \
     && make && make install \
     && ln -sf /usr/local/nginx/sbin/nginx /usr/bin/nginx \

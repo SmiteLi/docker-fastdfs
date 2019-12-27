@@ -33,3 +33,11 @@ docker run -d \
 
 删除镜像：
 docker rm -f do1fastdfs
+
+3. 验证：
+
+进入容器内：docker exec -it  do1fastdfs bash
+
+[root@do1 /]# fdfs_upload_file /etc/fdfs/client.conf /anaconda-post.log 
+group1/M00/00/00/CmiBWV4FvLOAOzlKAAAvW-zrzGY713.log
+[root@do1 /]# curl http://127.0.0.1:8888/group1/M00/00/00/CmiBWV4FvIqAPp5pAAAvW-zrzGY962.log
