@@ -14,7 +14,7 @@ nginx.conf
 
 
 准备文件夹：
-mkdir -p /data/fastdfs/storage /data/fastdfs/tracker `pwd`/html
+mkdir -p /data/fastdfs/storage /data/fastdfs/tracker
 
 然后按照下面运行镜像：
 
@@ -25,7 +25,6 @@ docker run -d \
   -v `pwd`/storage.conf:/etc/fdfs/storage.conf \
   -v `pwd`/tracker.conf:/etc/fdfs/tracker.conf \
   -v `pwd`/client.conf:/etc/fdfs/client.conf \
-  -v `pwd`/html:/usr/local/nginx/html \
   -v /data/fastdfs/storage:/data/fastdfs/storage \
   -v /data/fastdfs/tracker:/data/fastdfs/tracker \
   --name do1fastdfs \
